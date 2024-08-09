@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Calendar";
+    Layout = "~/Views/Shared/_Layout 2.cshtml";
+}
+
+@section MyCSS{
+    <link href="~/assets2/calendar/main.min.css" rel="stylesheet" />
+    <style>
+        #calendar {
+            width: 1000px;
+            height: 850px;
+            margin: 40px auto;
+            padding: 0 10px;
+            background-color:thistle;
+        }
+        
+        .fc-event-title {
+            height: 20px;
+            line-height: 20px;
+            font-size: 12px; 
+        }
+        
+    </style>
+}
+<!-- Bread crumb and right sidebar toggle -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-7 align-self-center">
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">月曆</h4>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 p-0">
+                        <li class="breadcrumb-item"><a href="/Hostel/RoomOrder" class="text-muted">返回</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- Container fluid  -->
+<div id="calendar"></div>
+<!-- End Container fluid  -->
+@section MyJS{
+    <script src="~/assets2/calendar/main.min.js"></script>
+    <script src="~/assets2/calendar/locales-all.min.js"></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        initialDate: '@(DateTime.Now.ToString("yyyy-MM-dd"))',
+        editable: true,
+        navLinks: true, 
+        dayMaxEvents: true, 
+        events: {
+            url: '/Hostel/Calendar2',
+            failure: function () {
+                document.getElementById('script-warning').style.display = 'block'
+            }
+        },
+    });
+
+    calendar.render();
+
+            }, 500);
+});
+
+    </script>
+}

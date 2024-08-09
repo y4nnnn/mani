@@ -1,0 +1,95 @@
+﻿@model Mani.Models.Product
+@{
+    ViewBag.Title = "EditProduct";
+    Layout = "~/Views/Shared/_Layout 2.cshtml";
+}
+
+<!-- Bread crumb and right sidebar toggle -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-7 align-self-center">
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">產品修改</h4>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 p-0">
+                        <li class="breadcrumb-item"><a href="/Backend/Index" class="text-muted">Home</a></li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">產品修改</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- Container fluid  -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/Mall/EditProduct" class="contact-form" method="post" autocomplete="off" enctype="multipart/form-data">
+                        @Html.HiddenFor(m => m.ProductID)
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Type, "類別", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;", min = 1, max = 4 } })
+                                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ProductName, "產品名稱", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;" } })
+                                    @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ProductPrice, "價格", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.ProductPrice, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;", value = 1, min = 1 } })
+                                    @Html.ValidationMessageFor(model => model.ProductPrice, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.UnitInStock, "庫存", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.UnitInStock, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;" } })
+                                    @Html.ValidationMessageFor(model => model.UnitInStock, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-5" for="pImage">照片上傳</label>
+                                    <input type="file" id="pImage" class="form-control" style="border-color: #ccc;" name="pImage">
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ProductDesc, "產品描述", htmlAttributes: new { @class = "control-label col-md-12" })
+                                    @Html.TextAreaFor(model => model.ProductDesc, new { @class = "form-control custom-textarea", style = "border-color: #ccc; height: 150px;" })
+                                    @Html.ValidationMessageFor(model => model.ProductDesc, "", new { @class = "text-danger" })
+                                </div>
+                                <br />
+                                <div class="form-group text-right">
+                                    <input type="submit" class="btn btn-info" value="修改" />
+                                    <button type="reset" class="btn btn-dark">重設</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+<!-- End Container fluid  -->

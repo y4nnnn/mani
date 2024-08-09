@@ -1,0 +1,116 @@
+﻿@model Mani.Models.Room
+@{
+    ViewBag.Title = "EditRoom";
+    Layout = "~/Views/Shared/_Layout 2.cshtml";
+}
+
+<!-- Bread crumb and right sidebar toggle -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-7 align-self-center">
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">房型修改</h4>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 p-0">
+                        <li class="breadcrumb-item"><a href="/Backend/Index" class="text-muted">Home</a></li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">房型修改</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- Container fluid  -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/Hostel/EditRoom" class="contact-form" method="post" autocomplete="off" enctype="multipart/form-data">
+                        @Html.HiddenFor(m => m.RoomID)
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Type,"類別", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;", min = 1, max = 3 } })
+                                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.RoomName, "房間名稱", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.RoomName, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;" } })
+                                    @Html.ValidationMessageFor(model => model.RoomName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.RoomSize, "房間尺寸", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.RoomSize, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;" } })
+                                    @Html.ValidationMessageFor(model => model.RoomSize, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.CatsLimit, "貓咪上限", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.CatsLimit, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;" } })
+                                    @Html.ValidationMessageFor(model => model.CatsLimit, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SunTime, "陽光時間", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.SunTime, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;" } })
+                                    @Html.ValidationMessageFor(model => model.SunTime, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.OverTime, "超時費", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.OverTime, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;" } })
+                                    @Html.ValidationMessageFor(model => model.OverTime, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.AddCats, "加貓費", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.AddCats, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;" } })
+                                    @Html.ValidationMessageFor(model => model.AddCats, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Price, "價格", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;", value = 1, min = 1 } })
+                                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-5" for="pImage">照片上傳</label>
+                                    <input type="file" id="pImage" class="form-control" style="border-color: #ccc;" name="pImage">
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.RoomDesc, "房間描述", htmlAttributes: new { @class = "control-label col-md-12" })
+                                    @Html.TextAreaFor(model => model.RoomDesc, new { @class = "form-control custom-textarea", style = "border-color: #ccc; height: 150px;" })
+                                    @Html.ValidationMessageFor(model => model.RoomDesc, "", new { @class = "text-danger" })
+                                </div>
+                                <br />
+                                <div class="form-group text-right">
+                                    <input type="submit" class="btn btn-info" value="修改" />
+                                    <button type="reset" class="btn btn-dark">重設</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+<!-- End Container fluid  -->

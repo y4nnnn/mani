@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<section class="home-slider owl-carousel">
+    <div class="slider-item" style="background-image: url(/images/bg1.jpg); background-position: center bottom;">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+                <div class="col-md-8 col-sm-12 text-center ftco-animate">
+                    <span class="subheading">Welcome</span>
+                    <h1 class="mb-4">Rang Mao Mi Xiang Hui Dao Jia</h1>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="slider-item" style="background-image: url(/images/bg2.jpg); background-position: center bottom;">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+                <div class="col-md-8 col-sm-12 text-center ftco-animate">
+                    <span class="subheading">Welcome</span>
+                    <h1 class="mb-4">Yong Lan &amp; Ning Jing</h1>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="slider-item" style="background-image: url(/images/bg3.jpg); background-position: center bottom;">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+                <div class="col-md-8 col-sm-12 text-center ftco-animate">
+                    <span class="subheading">Welcome</span>
+                    <h1 class="mb-4">Wo Zhao Gu Ni Fang Xin</h1>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<br />
+<br />
+
+<section class="ftco-about d-md-flex">
+    <div class="one-half img" style="background-image: url(/images/bg4.jpg);"></div>
+    <div class="one-half ftco-animate">
+        <div class="overlap">
+            <div class="heading-section ftco-animate ">
+                <span class="subheading">Discover</span>
+                <h2 class="mb-4">Our Story</h2>
+            </div>
+            <div>
+                <p>Yin wei xi huan mao mi .Xiang dao you shi hou mao mi yin wei nu cai bu zai jia ,mei ren zhao gu you dian xin teng .Suo yi xi wang neng bang mang zhao gu ta men .</p>
+            </div>
+        </div>
+    </div>
+</section>
+<br />
+<br />
+<section class="ftco-gallery">
+    <div class="container-wrap">
+        <div class="row no-gutters" id="imageGallery">
+            @foreach (var imagePath in ViewBag.ImagePaths)
+            {
+                <div class="col-md-3 ftco-animate">
+                    <a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url('@Url.Content(imagePath)');">
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<br />
+
+
+
+
+

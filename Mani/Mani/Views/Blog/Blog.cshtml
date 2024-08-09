@@ -1,0 +1,87 @@
+﻿@model List<Mani.Models.Blog>
+@using Mani.Models
+@{
+    ViewBag.Title = "Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section MyCSS
+    {
+    <style>
+        /*        .fixed-size-img {
+            max-width: 100%;
+        }   */
+        .fixed-size-img {
+            width: 100%; /* 使圖片寬度填滿其父元素 */
+            height: 200px; /* 設置固定高度 */
+            object-fit: cover; /* 保持圖片比例，填滿整個區域 */
+        }
+
+        .img {
+            width: 100%;
+            height: 200px;
+            overflow: hidden; /* 隱藏溢出部分 */
+        }
+    </style>
+}
+<section class="home-slider owl-carousel">
+
+    <div class="slider-item" style="background-image: url(/images/bg6.jpg); background-position: center bottom;">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text justify-content-center align-items-center">
+
+                <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                    <h1 class="mb-3 mt-5 bread">Blog</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="@Url.Action("Index","Home")">Home</a></span> <span>Blog</span></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row d-flex">
+            @{
+
+                var g = Model.GroupBy(p => Model.IndexOf(p) / 3);
+
+                foreach (var group in g)
+                {
+
+
+                    foreach (Blog item in group)
+                    {
+
+
+                        <div class="col-md-4 d-flex ftco-animate">
+                            <div class="blog-entry align-self-stretch">
+                                <div class="img">
+                                    <img src="/Pic/blog/@item.BlogImg" class="img-fluid fixed-size-img">
+                                </div>
+                                <div class="text py-4 d-block">
+                                    <div class="meta">
+                                        <div><a>@item.CreatedDate.ToString("yyyy-MM-dd")</a></div>
+                                    </div>
+                                    <h3 class="heading mt-2"><a>@item.BlogTitle</a></h3>
+                                    <a href="/Blog/BlogDetail/@item.BlogID" style="margin-left: 10px;">READ MORE</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+
+                }
+            }
+
+        </div>
+        <div class="col-md-12 text-center">
+            <a href="@Url.Action("Create","Blog")" class="btn btn-primary py-3 px-5">Add</a>
+        </div>
+        
+    </div>
+</section>
+

@@ -1,0 +1,95 @@
+﻿@model Mani.ViewModels.SearchinfoViewModel
+@{
+    ViewBag.Title = "SearchInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section MyCSS
+    {
+    <link href="~/js/sweetalert2.min.css" rel="stylesheet" />
+}
+
+<section class="ftco-section contact-section">
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container mt-5">
+        <div class="row block-9 justify-content-center">
+            <div class="col-md-6 ftco-animate">
+                <form action="/Form/SearchInfo" class="contact-form" method="post" autocomplete="off">
+                    @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OwnerName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.OwnerName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.OwnerName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group d-flex justify-content-between">
+                        <input type="submit" class="btn btn-primary py-3 px-5" id="btn1" value="Confirm" />
+                        <input type="button" class="btn btn-primary py-3 px-5" id="btnDemo" value="Demo" />
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section MyJS{
+    <script src="~/js/sweetalert2.min.js"></script>
+    <script>
+        $(function () {
+            $("#btn1").click(function () {
+
+
+                var obj = {
+                    OwnerName: $("#OwnerName").val(),
+                    PhoneNumber: $("#PhoneNumber").val(),
+                    Email: $("#Email").val(),
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Form/SearchInfo",
+                    data: JSON.stringify(obj), //json物件
+                    dataType: "json",
+                    contentType: 'application/json; charset=UTF-8',
+                    success: function (data) {
+                        alert(data.msg);
+
+                        location.href = "/Form/FormDetail";
+                    },
+                    error: function () {
+                        alert("資料不符");
+                    }
+
+                })
+
+            });
+
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#btnDemo').click(function () {
+                $('#OwnerName').val('游小魚');
+                $('#PhoneNumber').val('0912345678');
+                $('#Email').val('fish@gmail.com');
+            });
+        });
+    </script>
+}
+
+

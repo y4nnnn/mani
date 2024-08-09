@@ -1,0 +1,59 @@
+﻿@model Mani.Models.Manager
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mani's Garden</title>
+    <link rel="shortcut icon" type="image/png" href="/images/logo1.png" />
+    <link href="/assets2/css/styles.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!--  Body Wrapper -->
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+         data-sidebar-position="fixed" data-header-position="fixed">
+        <div class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+            <div class="d-flex align-items-center justify-content-center w-100">
+                <div class="row justify-content-center w-100">
+                    <div class="col-md-8 col-lg-6 col-xxl-3">
+                        <div class="card mb-0">
+                            <div class="card-body">
+                                <a class="text-nowrap logo-img text-center d-block py-3 w-100">
+                                    <img src="~/images/logo2.jpg" width="60" alt="">
+                                </a>
+                                <form action="/Manager/Login" class="contact-form" method="post" autocomplete="off">
+                                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.UserName, "帳號", htmlAttributes: new { @class = "control-label col-md-3", style = "font-weight: bold;" })
+                                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.PassWord, "密碼", htmlAttributes: new { @class = "control-label col-md-3", style = "font-weight: bold;" })
+                                        @Html.EditorFor(model => model.PassWord, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <input type="submit" value="登入" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" />
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <a class="text-primary fw-bold ms-2" href="/Manager/Register">創建帳號</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/assets2/js/jquery.min.js"></script>
+    <script src="/assets2/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

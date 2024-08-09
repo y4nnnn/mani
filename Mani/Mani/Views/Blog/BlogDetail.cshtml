@@ -1,0 +1,57 @@
+﻿@model Mani.Models.Blog
+@{
+    ViewBag.Title = "BlogDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="home-slider owl-carousel d-flex align-items-end" style="height: 40vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                <h1 class="mb-3 bread">Blog</h1>
+                <p class="breadcrumbs mb-0"><span class="mr-2"><a href="@Url.Action("Index","Home")">Home</a></span> <span>Blog</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5 ftco-animate">
+                <a href="/Pic/blog/@Model.BlogImg" class="image-popup"><img src="/Pic/blog/@Model.BlogImg" class="img-fluid" alt="Colorlib Template"></a>
+            </div>
+            <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+                <br />
+                <h3>@Model.BlogTitle</h3>
+                <br />
+                <hr style="border-top: 1px solid #ccc; margin-top: 15px; margin-bottom: 0;">
+                <br />
+                <br />
+                <br />
+                <div style="color: white">
+                    @Html.Raw(HttpUtility.HtmlEncode(Model.BlogContent).Replace("\r\n", "<br/>"))
+                </div>
+            </div>
+        </div>
+        <hr style="border-top: 1px solid #ccc; margin-top: 15px; margin-bottom: 0;">
+        <div class="row mt-5">
+            <div class="col-lg-12 ftco-animate">
+                <h3>Other Blogs</h3>
+            </div>
+            @foreach (var blog in ViewBag.OtherBlogs)
+            {
+                <div class="col-md-4 ftco-animate">
+                    <a href="@Url.Action("BlogDetail", "Blog", new { id = blog.BlogID })">
+                        <div class="agent" style="text-align: center;">
+                            <div class="img">
+                                <img src="@Url.Content("~/Pic/blog/" + blog.BlogImg)" class="img-fluid fixed-size-img" alt="Other Image">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+

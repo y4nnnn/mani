@@ -1,0 +1,163 @@
+﻿@model IEnumerable<Mani.Models.Room>
+@{
+    ViewBag.Title = "RoomOverview";
+    Layout = "~/Views/Shared/_Layout 2.cshtml";
+}
+
+<!-- Bread crumb and right sidebar toggle -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-7 align-self-center">
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">房型總覽</h4>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 p-0">
+                        <li class="breadcrumb-item"><a href="/Backend/Index" class="text-muted">首頁</a></li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">房型總覽</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- Container fluid  -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- basic table -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-5 text-left">
+                        <button type="button" class="btn waves-effect waves-light btn-rounded btn-success" onclick="location.href='/Hostel/AddRoom'">
+                            新增房型
+                        </button>
+                    </div>
+                    <br />
+                    <div class="table-responsive">
+                        <table id="zero_config" class="table table-striped table-bordered no-wrap">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">房間照片</th>
+                                    <th class="text-center">編號</th>
+                                    <th class="text-center">類別</th>
+                                    <th class="text-center">房型名稱</th>
+                                    <th class="text-center">房間尺寸</th>
+                                    <th class="text-center">貓咪上限</th>
+                                    <th class="text-center">陽光時間</th>
+                                    <th class="text-center">超時費</th>
+                                    <th class="text-center">加貓費</th>
+                                    <th class="text-center">房間價格</th>
+                                    <th class="text-center">房間描述</th>
+                                    @*<th class="text-center">@Html.DisplayNameFor(model => model.RoomImg)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.RoomID)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.Type)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.RoomName)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.RoomSize)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.CatsLimit)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.SunTime)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.OverTime)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.AddCats)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.Price)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.RoomDesc)</th>*@
+                                    <th class="text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="text-center align-middle">
+                                            <img src="/Pic/room/@item.RoomImg" alt="Room Image" class="img-thumbnail" style="max-width: 120px;" />
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @Html.DisplayFor(modelItem => item.RoomID)
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @Html.DisplayFor(modelItem => item.Type)
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @Html.DisplayFor(modelItem => item.RoomName)
+                                        </td>
+                                        <td class="text-center align-middle" style="max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+                                            title="@Html.DisplayFor(modelItem => item.RoomSize)">
+                                            @Html.DisplayFor(modelItem => item.RoomSize)
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @Html.DisplayFor(modelItem => item.CatsLimit)
+                                        </td>
+                                        <td class="text-center align-middle" style="max-width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+                                            title="@Html.DisplayFor(modelItem => item.SunTime)">
+                                            @Html.DisplayFor(modelItem => item.SunTime)
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @Html.DisplayFor(modelItem => item.OverTime)
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @Html.DisplayFor(modelItem => item.AddCats)
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @Html.DisplayFor(modelItem => item.Price)
+                                        </td>
+                                        <td class="text-center align-middle" style="max-width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+                                            title="@Html.DisplayFor(modelItem => item.RoomDesc)">
+                                            @Html.DisplayFor(modelItem => item.RoomDesc)
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <button type="button"
+                                                    class="btn waves-effect waves-light btn-rounded btn-warning" onclick="location.href='/Hostel/EditRoom/@item.RoomID'">
+                                                修改
+                                            </button>
+                                            <button type="button"
+                                                    class="btn waves-effect waves-light btn-rounded btn-danger" onclick="location.href='/Hostel/DelRoom/@item.RoomID'">
+                                                刪除
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="text-center">房間照片</th>
+                                    <th class="text-center">編號</th>
+                                    <th class="text-center">類別</th>
+                                    <th class="text-center">房型名稱</th>
+                                    <th class="text-center">房間尺寸</th>
+                                    <th class="text-center">貓咪上限</th>
+                                    <th class="text-center">陽光時間</th>
+                                    <th class="text-center">超時費</th>
+                                    <th class="text-center">加貓費</th>
+                                    <th class="text-center">房間價格</th>
+                                    <th class="text-center">房間描述</th>
+                                    <th class="text-center"></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <a href="/Hostel/RoomOverview">第一頁</a>
+
+                        @if (ViewBag.CurrentPage != 1)
+                        {
+                            <a href="/Hostel/ChangePage2?pageIndex=@(ViewBag.CurrentPage-1)">上一頁</a>
+                        }
+
+                        @if (ViewBag.CurrentPage != ViewBag.TotalPages)
+                        {
+                            <a href="/Hostel/ChangePage2?pageIndex=@(ViewBag.CurrentPage+1)">下一頁</a>
+                        }
+
+                        <a href="/Hostel/ChangePage2?pageIndex=@ViewBag.TotalPages">最後一頁</a>
+
+                        @ViewBag.CurrentPage / @ViewBag.TotalPages
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+</div>
+<!-- End Container fluid  -->

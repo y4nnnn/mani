@@ -1,0 +1,99 @@
+﻿@model Mani.Models.Manager
+@{
+    ViewBag.Title = "EditManager";
+    Layout = "~/Views/Shared/_Layout 2.cshtml";
+}
+
+<!-- Bread crumb and right sidebar toggle -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-7 align-self-center">
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">資料修改</h4>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 p-0">
+                        <li class="breadcrumb-item"><a href="/Backend/Index" class="text-muted">Home</a></li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">資料修改</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- Container fluid  -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/Manager/EditManager" class="contact-form" method="post" autocomplete="off" enctype="multipart/form-data">
+                        @Html.HiddenFor(m => m.ManagerID)
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ManagerID,"員工編號", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.ManagerID, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;", @readonly = "readonly" } })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.UserName,"帳號", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;", @readonly = "readonly" } })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.PassWord,"密碼", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.PassWord, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;", type = "password" } })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Name,"名字", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;" } })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.PhoneNumber,"手機號碼", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;" } })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Email, "電子信箱", htmlAttributes: new { @class = "control-label col-md-5" })
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", style = "border-color: #ccc;" } })
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-5" for="pImage">照片上傳</label>
+                                    <input type="file" id="pImage" class="form-control" style="border-color: #ccc;" name="pImage">
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-info" value="修改" />
+                                    <button type="reset" class="btn btn-dark">重設</button>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <br />
+                                <div class="form-group text-center">
+                                    <a href="/Pic/manager/@Model.ManagerImg" style="display: inline-block; border: 1px solid #ccc; padding: 5px;" class="image-popup">
+                                        <img src="/Pic/manager/@Model.ManagerImg" class="img-fluid">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+<!-- End Container fluid  -->

@@ -1,0 +1,134 @@
+﻿@model Mani.Models.Product
+@{
+    ViewBag.Title = "ShopDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="home-slider owl-carousel">
+
+    <div class="slider-item" style="background-image: url(/images/bg7.jpg);">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text justify-content-center align-items-center">
+
+                <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                    <h1 class="mb-3 mt-5 bread">Product Detail</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Product Detail</span></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5 ftco-animate">
+                <a href="/Pic/product/@Model.ProductImg" class="image-popup"><img src="/Pic/product/@Model.ProductImg" class="img-fluid" alt="Colorlib Template"></a>
+            </div>
+
+            <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+                <h3>@Model.ProductName</h3>
+                <p class="price"><span>$@Model.ProductPrice</span></p>
+                <p>商品庫存:@Model.UnitInStock</p>
+                <br />
+                <br />
+                <div style="color: white">
+                    @*<p>@Model.ProductDesc</p>*@
+                    <p>@Html.Raw(HttpUtility.HtmlEncode(Model.ProductDesc).Replace("\r\n", "<br/>"))</p>
+                </div>
+                <br />
+                <br />
+                <br />
+
+                <form action="/Shop/AddToCart" method="post">
+                    @Html.HiddenFor(m => m.ProductID)
+                    @Html.HiddenFor(m => m.ProductName)
+                    @Html.HiddenFor(m => m.ProductPrice)
+                    @Html.HiddenFor(m => m.ProductImg)
+
+
+                    <div class="row mt-4">
+                        <div class="w-100"></div>
+                        <div class="input-group col-md-6 d-flex mb-3">
+                            <span class="input-group-btn mr-2">
+                                <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                                    <i class="icon-minus"></i>
+                                </button>
+                            </span>
+                            <input type="text" id="quantity" name="Amount" class="form-control input-number" value="1" min="1" max="100">
+                            <span class="input-group-btn ml-2">
+                                <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                                    <i class="icon-plus"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <br />
+                    <button class="btn btn-primary py-3 px-5" type="submit" style="color:black !important">Add to cart</button>
+                </form>
+                @*<p><a href="cart.html" class="btn btn-primary py-3 px-5">Add to Cart</a></p>*@
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate text-center">
+                <span class="subheading">Discover</span>
+                <h2 class="mb-4">Other products</h2>
+                @*<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>*@
+            </div>
+        </div>
+        <div class="row mt-5">
+            @*<div class="col-lg-12 ftco-animate">
+                    <h3>其他小圖片</h3>
+                </div>*@
+            @foreach (var product in ViewBag.OtherProducts)
+            {
+                <div class="col-md-4 ftco-animate">
+                    <a href="@Url.Action("ShopDetail", "Shop", new { id = product.ProductID })">
+                        <div class="agent" style="text-align: center;">
+                            <div class="img">
+                                <img src="@Url.Content("~/images/product/" + product.ProductImg)" class="img-fluid fixed-size-img" alt="Other Image">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+@section MyJS{
+    <script>
+        $(document).ready(function () {
+
+            var quantitiy = 0;
+            $('.quantity-right-plus').click(function (e) {
+
+                e.preventDefault();
+                
+                var quantity = parseInt($('#quantity').val());
+
+                $('#quantity').val(quantity + 1);
+
+            });
+
+            $('.quantity-left-minus').click(function (e) {
+                
+                e.preventDefault();
+                
+                var quantity = parseInt($('#quantity').val());
+
+
+                if (quantity > 0) {
+                    $('#quantity').val(quantity - 1);
+                }
+            });
+
+        });</script>
+}
+

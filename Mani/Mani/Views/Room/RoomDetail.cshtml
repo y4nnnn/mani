@@ -1,0 +1,57 @@
+﻿@model Mani.Models.Room
+@{
+    ViewBag.Title = "RoomDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="home-slider owl-carousel">
+
+    <div class="slider-item" style="background-image: url(/images/bg5.jpg); background-position: center bottom; ">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text justify-content-center align-items-center">
+
+                <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                    <h1 class="mb-3 mt-5 bread">Room Detail</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="@Url.Action("Index","Home")">Home</a></span> <span>Room Detail</span></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5 ftco-animate">
+                <a href="/Pic/room/@Model.RoomImg" class="image-popup"><img src="/Pic/room/@Model.RoomImg" class="img-fluid" alt="Colorlib Template"></a>
+            </div>
+            <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+                <br />
+                <h3>@Model.RoomName</h3>
+                <br />
+                <hr style="border-top: 1px solid #ccc; margin-top: 15px; margin-bottom: 0;">
+                <br />
+                <p>@Model.RoomDesc</p>
+                <br />
+                <br />
+                <p>@Model.RoomSize</p>
+                <br />
+                <p>貓貴賓上限：@Model.CatsLimit 隻</p>
+                <p>陽光玩耍時間：@Model.SunTime </p>
+                <p>超時費：@Model.OverTime 元/1hr</p>
+                <p>加貓費：@Model.AddCats 元/一貓</p>
+                <br />
+                <br />
+                <br />
+                <p class="price"><span>Price: $@Model.Price </span></p>
+                <br />
+                <p><a href="/Form/Form" class="btn btn-primary py-3 px-5">Book</a></p>
+                <br />
+                <hr style="border-top: 1px solid #ccc; margin-top: 15px; margin-bottom: 0;">
+            </div>
+        </div>
+    </div>
+</section>
+

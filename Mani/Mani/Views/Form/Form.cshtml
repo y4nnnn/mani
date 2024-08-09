@@ -1,0 +1,128 @@
+﻿@model Mani.ViewModels.FormViewModel
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="home-slider owl-carousel d-flex align-items-end" style="height: 40vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                <h1 class="mb-3 bread">Book Room</h1>
+                <p class="breadcrumbs mb-0"><span class="mr-2"><a href="@Url.Action("Index","Home")">Home</a></span> <span>Book Room</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section contact-section">
+    <div class="container mt-5">
+        <div class="row block-9 justify-content-center">
+            <div class="col-md-6 ftco-animate">
+                <form action="/Form/Form" class="contact-form" method="post" autocomplete="off">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CheckIn, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.CheckIn, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                        @Html.ValidationMessageFor(model => model.CheckIn, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CheckOut, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.CheckOut, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                        @Html.ValidationMessageFor(model => model.CheckOut, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OwnerName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.OwnerName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.OwnerName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CatsName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.CatsName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CatsName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RoomName, htmlAttributes: new { @class = "control-label col-md-2", })
+                        @Html.DropDownListFor(model => model.RoomName, ViewBag.RoomList as SelectList, "請選擇", new { @class = "form-control", style = "color: white !important; background-color:#0f0f0f !important;" })
+                        @Html.ValidationMessageFor(model => model.RoomName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CatsNum, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.CatsNum, new { htmlAttributes = new { @class = "form-control", value = 1, min = 1 } })
+                        @Html.ValidationMessageFor(model => model.CatsNum, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group d-flex justify-content-between">
+                        <input type="button" class="btn btn-primary py-3 px-5" id="btn1" value="Confirm" />
+                        <input type="button" class="btn btn-primary py-3 px-5" id="btnDemo" value="Demo" />
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section MyJS{
+
+    <script>
+        //ready
+        $(function () {
+            $("#btn1").click(function () {
+
+                var obj = {
+                    Email: $("#Email").val(),
+                    CheckIn: $("#CheckIn").val(),
+                    CheckOut: $("#CheckOut").val(),
+                    OwnerName: $("#OwnerName").val(),
+                    PhoneNumber: $("#PhoneNumber").val(),
+                    CatsName: $("#CatsName").val(),
+                    RoomName: $("#RoomName").val(),
+                    CatsNum: $("#CatsNum").val()
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Form/Form",
+                    data: JSON.stringify(obj), //json物件
+                    //data: obj,
+                    dataType: "json",
+                    contentType: 'application/json; charset=UTF-8',
+                    success: function (data) {
+                        //$("#result").html(data.msg);
+                        alert(data.msg);
+
+                        location.href = "/Home/Index";
+                    }
+                })
+
+            });
+
+        });
+
+
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#btnDemo').click(function () {
+                $('#Email').val('fish@gmail.com');
+                $('#OwnerName').val('游小魚');
+                $('#PhoneNumber').val('0912345678');
+                $('#CatsName').val('小貓、小咪');
+                $('#RoomName').val('森林房');
+                $('#CatsNum').val('2');
+            });
+        });
+    </script>
+}
+

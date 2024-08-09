@@ -1,0 +1,180 @@
+﻿@model List<Mani.Models.ShoppingItem>
+@{
+    ViewBag.Title = "ShoppingCartList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section MyCSS
+    {
+    <link href="~/js/sweetalert2.min.css" rel="stylesheet" />
+}
+
+<section class="home-slider owl-carousel d-flex align-items-end" style="height: 40vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                <h1 class="mb-3 bread">Cart</h1>
+                <p class="breadcrumbs mb-0"><span class="mr-2"><a href="@Url.Action("Index","Home")">Home</a></span> <span>Cart</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section ftco-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ftco-animate">
+                <div class="cart-list">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr class="text-center">
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="text-center">
+                                    <td class="product-remove"><a href="/Shop/DeleteProduct?id=@item.ProductID"><span class="icon-close"></span></a></td>
+
+                                    <td class="image-prod"><div class="img" style="background-image: url(/Pic/product/@item.ProductImg);"></div></td>
+
+                                    <td class="product-name">
+                                        <h3>@item.ProductName</h3>
+                                        <p>@item.ProductDesc</p>
+                                    </td>
+
+                                    <td class="price">$@item.ProductPrice</td>
+
+                                    <td class="quantity">
+                                        <div class="input-group mb-3">
+                                            @*<input type="number" id="amount-@item.ProductID" name="Amount" class="quantity form-control input-number" value="@item.Amount" min="1" max="100">*@
+                                            <input type="number" name="Amount" id="amount-@item.ProductID" class="quantity form-control input-number" value="@item.Amount" min="1" max="100" data-product-id="@item.ProductID">
+                                        </div>
+                                    </td>
+
+                                    <td class="total">$@(item.ProductPrice * item.Amount)</td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <div class="col col-lg-3 col-md-6 mt-5 cart-wrap ftco-animate">
+                <div class="cart-total mb-3">
+                    <h3>Cart Totals</h3>
+                    <p class="d-flex">
+                        <span>Subtotal</span>
+                        <span id="subtotal">$@Model.Sum(item => item.Amount * item.ProductPrice)</span>
+                    </p>
+                    <p class="d-flex">
+                        <span>Delivery</span>
+                        <span id="delivery">$60</span>
+                    </p>
+                    @if (Model.Sum(item => item.Amount * item.ProductPrice) > 1000)
+                    {
+                        <p class="d-flex">
+                            <span>Discount</span>
+                            <span id="discount">$60</span>
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="d-flex">
+                            <span>Discount</span>
+                            <span id="discount">$0</span>
+                        </p>
+                    }
+
+                    <hr>
+                    <p class="d-flex total-price">
+                        <span>Total</span>
+                        <span id="total">$@(Model.Sum(item => item.ProductPrice * item.Amount) + 60 - (Model.Sum(item => item.ProductPrice * item.Amount) > 1000 ? 60 : 0))</span>
+                    </p>
+                </div>
+                <p class="text-center"><a href="/Member/CheckOut" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+                @*<div>
+                        <input id="Button1" type="button" value="Proceed to Checkout" class="btn btn-primary py-3 px-4"/>
+                    </div>*@
+                <p class="text-left"><a href="/Shop/Index" class="btn btn-primary py-3 px-4">Keep Shopping</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+@section MyJS
+    {
+    <script>
+        // 監聽數量輸入框變化
+        document.addEventListener('DOMContentLoaded', function () {
+            var quantityInputs = document.querySelectorAll('.quantity input');
+            quantityInputs.forEach(function (input) {
+                input.addEventListener('change', function () {
+                    updateTotal();
+                });
+            });
+        });
+
+        // 更新總金額顯示
+        function updateTotal() {
+            var total = 0;
+            var items = document.querySelectorAll('.cart-list tbody tr');
+
+            items.forEach(function (item) {
+                var price = parseFloat(item.querySelector('.price').textContent.replace('$', ''));
+                var quantity = parseInt(item.querySelector('.quantity input').value);
+                var subtotal = price * quantity;
+                item.querySelector('.total').textContent = '$' + subtotal.toFixed(2);
+                total += subtotal;
+            });
+
+            // 更新總金額和折扣信息
+            var subtotal = total;
+            var delivery = 60;
+            var discount = subtotal > 1000 ? 60 : 0;
+            var finalTotal = subtotal + delivery - discount;
+
+            document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
+            document.getElementById('delivery').textContent = '$' + delivery.toFixed(2);
+            document.getElementById('discount').textContent = '$' + discount.toFixed(2);
+            document.getElementById('total').textContent = '$' + finalTotal.toFixed(2);
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // 獲取所有數量輸入框
+            var quantityInputs = document.querySelectorAll('.quantity input');
+
+
+            quantityInputs.forEach(function (input) {
+                var productId = input.getAttribute('data-product-id'); // 取商品ID
+                var lastAmount = sessionStorage.getItem('amount-' + productId); // 從Session Storage獲取最後數量
+
+                if (lastAmount !== null) {
+                    input.value = lastAmount; // 設置輸入框的最後數量
+                }
+
+
+                input.addEventListener('change', function () {
+                    var newAmount = input.value;
+                    sessionStorage.setItem('amount-' + productId, newAmount); // 存最新的數量值到Session Storage
+                });
+            });
+        });
+    </script>
+
+
+    <script src="~/js/sweetalert2.min.js"></script>
+}
+

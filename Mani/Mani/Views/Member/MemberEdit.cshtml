@@ -1,0 +1,63 @@
+﻿@model Mani.Models.Member
+@{
+    ViewBag.Title = "MemberEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="home-slider owl-carousel d-flex align-items-end" style="height: 40vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                <h1 class="mb-3 bread">MemberEdit</h1>
+                <p class="breadcrumbs mb-0"><span class="mr-2"><a href="@Url.Action("Index","Home")">Home</a></span> <span>MemberEdit</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section contact-section">
+    <div class="container mt-5">
+        <div class="row block-9 justify-content-center">
+            <div class="col-md-6 ftco-animate">
+                <form action="/Member/MemberEdit" class="contact-form" method="post" autocomplete="off">
+                    <input type="hidden" name="MemberID" value="@Model.MemberID">
+                    <div class="form-group">
+                        @*<input type="text" id="first-name" class="form-control">*@
+                        @Html.LabelFor(model => model.UserName, "帳號", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @*<input type="text" class="form-control" placeholder="密碼" id="txtPassWord">*@
+                        @Html.LabelFor(model => model.PassWord, "密碼", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.PassWord, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                        @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @*<input type="text" class="form-control" placeholder="姓名" id="txtName">*@
+                        @Html.LabelFor(model => model.Name, "姓名", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @*<input type="text" class="form-control" placeholder="手機號碼" id="txtPhoneNumber">*@
+                        @Html.LabelFor(model => model.PhoneNumber, "手機號碼", htmlAttributes: new { @class = "control-label col-md-2", style = "white-space: nowrap;" })
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @*<input type="text" class="form-control" placeholder="電子信箱" id="txtEmail">*@
+                        @Html.LabelFor(model => model.Email, "電子信箱", htmlAttributes: new { @class = "control-label col-md-2", style = "white-space: nowrap;" })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary py-3 px-5" id="btn1" value="Confirm" />
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+

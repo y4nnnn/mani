@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Mani.Models.Order>
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section MyCSS
+    {
+    <style>
+
+
+        #customers tr:hover {
+            background-color: #6b4c1f;
+        }
+
+        #customers th, #customers td {
+            color: white; /* 文字顏色為白色 */
+        }
+
+        #customers th {
+            background-color: #C49B63;
+        }
+    </style>
+}
+<section class="home-slider owl-carousel d-flex align-items-end" style="height: 40vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                <h1 class="mb-3 bread">Shopping Order Search</h1>
+                <p class="breadcrumbs mb-0"><span class="mr-2"><a href="@Url.Action("Index","Home")">Home</a></span> <span>Shopping Order Search</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section contact-section">
+
+    <table class="table" id="customers">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderProduct)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+        </tr>
+
+        @*<hr style="border-top: 1px solid #ccc; margin-top: 15px; margin-bottom: 0;">*@
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderProduct)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div style="text-align: center">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a href="/Shop/OrderDetail">第一頁</a>
+        }
+
+
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a href="/Shop/ChangePage?pageIndex=@(ViewBag.CurrentPage-1)">上一頁</a>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="/Shop/ChangePage?pageIndex=@(ViewBag.CurrentPage+1)">下一頁</a>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="/Shop/ChangePage?pageIndex=@ViewBag.TotalPages">最後一頁</a>
+        }
+
+
+        @ViewBag.CurrentPage / @ViewBag.TotalPages
+    </div>
+   
+</section>
+

@@ -1,0 +1,231 @@
+﻿@model List<Mani.Models.Product>
+@using Mani.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section MyCSS
+    {
+    <style>
+        /*        .menu-entry .img {
+
+            max-width: 100%;
+
+        }*/
+        .abc {
+            width: 340px;
+        }
+    </style>
+
+}
+<section class="home-slider owl-carousel">
+
+    <div class="slider-item" style="background-image: url(/images/bg7.jpg);">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text justify-content-center align-items-center">
+
+                <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                    <h1 class="mb-3 mt-5 bread">Order Online</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="/Home/Index">Home</a></span> <span>Shop</span></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="ftco-menu mb-5 pb-5">
+    <div class="container">
+        <div class="row d-md-flex">
+            <div class="col-lg-12 ftco-animate p-md-5">
+                <div class="row">
+                    <div class="col-md-12 nav-link-wrap mb-5">
+                        <div class="nav ftco-animate nav-pills justify-content-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active" id="v-pills-0-tab" data-toggle="pill" href="#v-pills-0" role="tab" aria-controls="v-pills-0" aria-selected="true">CatFood</a>
+
+                            <a class="nav-link" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="false">CatCannedFood</a>
+
+                            <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">CatTreats</a>
+
+                            <a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">CatToys</a>
+                        </div>
+                    </div>
+                    <div class="col-md-12 d-flex align-items-center">
+
+                        <div class="tab-content ftco-animate" id="v-pills-tabContent">
+
+                            <div class="tab-pane fade show active" id="v-pills-0" role="tabpanel" aria-labelledby="v-pills-0-tab">
+                                <div class="row">
+                                    @{
+
+                                        foreach (Product item in Model)
+                                        {
+                                            if (item.Type == "貓飼料")
+                                            {
+
+
+                                                <div class="col-md-4 text-center">
+                                                    <div class="menu-wrap">
+                                                        <a href="/Shop/ShopDetail/@item.ProductID" class="menu-img img mb-4" style="background-image: url(/Pic/product/@item.ProductImg);"></a>
+                                                        <div class="text">
+                                                            <h3><a href="/Shop/ShopDetail/@item.ProductID">@item.ProductName</a></h3>
+                                                            @*<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>*@
+                                                            <p class="float-right">
+                                                                商品庫存:@item.UnitInStock
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            </p>
+                                                            <p class="price"><span>$@item.ProductPrice</span></p>
+                                                            <p><a href="/Shop/ShopDetail/@item.ProductID" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            }
+                                        }
+
+                                    }
+
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab">
+                                <div class="row">
+                                    @{
+
+                                        foreach (Product item in Model)
+                                        {
+                                            if (item.Type == "貓罐頭")
+                                            {
+
+
+                                                <div class="col-md-4 text-center">
+                                                    <div class="menu-wrap">
+                                                        <a href="/Shop/ShopDetail/@item.ProductID" class="menu-img img mb-4" style="background-image: url(/Pic/product/@item.ProductImg);"></a>
+                                                        <div class="text">
+                                                            <h3><a href="/Shop/ShopDetail/@item.ProductID">@item.ProductName</a></h3>
+                                                            @*<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>*@
+                                                            <p class="float-right">
+                                                                商品庫存:@item.UnitInStock
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            </p>
+                                                            <p class="price"><span>$@item.ProductPrice</span></p>
+                                                            <p><a href="/Shop/ShopDetail/@item.ProductID" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            }
+                                        }
+
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-2-tab">
+                                <div class="row">
+                                    @{
+
+                                        foreach (Product item in Model)
+                                        {
+                                            if (item.Type == "貓零食")
+                                            {
+
+
+                                                <div class="col-md-4 text-center">
+                                                    <div class="menu-wrap">
+                                                        <a href="/Shop/ShopDetail/@item.ProductID" class="menu-img img mb-4" style="background-image: url(/Pic/product/@item.ProductImg);"></a>
+                                                        <div class="text">
+                                                            <h3><a href="/Shop/ShopDetail/@item.ProductID">@item.ProductName</a></h3>
+                                                            @*<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>*@
+                                                            <p class="float-right">
+                                                                商品庫存:@item.UnitInStock
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            </p>
+                                                            <p class="price"><span>$@item.ProductPrice</span></p>
+                                                            <p><a href="/Shop/ShopDetail/@item.ProductID" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            }
+                                        }
+
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab">
+                                <div class="row">
+                                    @{
+
+                                        foreach (Product item in Model)
+                                        {
+                                            if (item.Type == "貓玩具")
+                                            {
+
+
+                                                <div class="col-md-4 text-center">
+                                                    <div class="menu-wrap">
+                                                        <a href="/Shop/ShopDetail/@item.ProductID" class="menu-img img mb-4" style="background-image: url(/Pic/product/@item.ProductImg);"></a>
+                                                        <div class="text">
+                                                            <h3><a href="/Shop/ShopDetail/@item.ProductID">@item.ProductName</a></h3>
+                                                            @*<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>*@
+                                                            <p class="float-right">
+                                                                商品庫存:@item.UnitInStock
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            </p>
+                                                            <p class="price"><span>$@item.ProductPrice</span></p>
+                                                            <p><a href="/Shop/ShopDetail/@item.ProductID" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            }
+                                        }
+
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

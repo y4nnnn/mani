@@ -1,0 +1,161 @@
+﻿@model Mani.ViewModels.CheckOutViewModel
+@using Mani.Models
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section MyCSS
+    {
+    <link href="~/js/sweetalert2.min.css" rel="stylesheet" />
+}
+<section class="home-slider owl-carousel d-flex align-items-end" style="height: 40vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                <h1 class="mb-3 bread">Checout</h1>
+                <p class="breadcrumbs mb-0"><span class="mr-2"><a href="@Url.Action("Index","Home")">Home</a></span> <span>Checout</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 ftco-animate">
+                <form action="/Member/CheckOut" class="billing-form ftco-bg-dark p-3 p-md-5" method="post" autocomplete="off">
+                    <h3 class="mb-4 billing-heading">Billing Details</h3>
+                    <div class="row align-items-end">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MemberInfo.Name, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.MemberInfo.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MemberInfo.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MemberInfo.PhoneNumber, "PhoneNumber", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.MemberInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MemberInfo.PhoneNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MemberInfo.Email, "Email", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.MemberInfo.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MemberInfo.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MemberInfo.Address, "Address", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.MemberInfo.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MemberInfo.Address, "", new { @class = "text-danger" })
+                            </div>
+                            <input type="hidden" name="Total" value="@ViewBag.Total" />
+                        </div>
+                    </div>
+
+                    <!-- END -->
+
+                </form>
+            </div> <!-- .col-md-8 -->
+
+
+
+
+            <div class="col-xl-4 sidebar ftco-animate">
+
+                <div class="cart-detail cart-total ftco-bg-dark p-3 p-md-4">
+                    <h3 class="billing-heading mb-4">Cart Total</h3>
+                    <p class="d-flex">
+                        <span>Subtotal</span>
+                        <span>$@ViewBag.Subtotal.ToString()</span>
+                    </p>
+                    <p class="d-flex">
+                        <span>Delivery</span>
+                        <span>$@ViewBag.Delivery.ToString()</span>
+                    </p>
+                    <p class="d-flex">
+                        <span>Discount</span>
+                        <span>$@ViewBag.Discount.ToString()</span>
+                    </p>
+                    <hr>
+                    <p class="d-flex total-price">
+                        <span>Total</span>
+                        <span>$@ViewBag.Total.ToString()</span>
+                    </p>
+                </div>
+                <br />
+                <div class="cart-detail ftco-bg-dark p-3 p-md-4">
+                    <h3 class="billing-heading mb-4">Complete</h3>
+                    
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="" class="mr-2" id="accept"> 我已閱讀並接受<a href="~/lookatme.html" style="color:red">條款</a></label>
+                            </div>
+                        </div>
+                    </div>
+                    @*<p><a href="#" class="btn btn-primary py-3 px-4">Place an order</a></p>*@
+                    <p><button type="submit" id="placeOrderButton" class="btn btn-primary py-3 px-4">Place an order</button></p>
+                </div>
+                @*</div>*@
+
+
+            </div>
+
+        </div>
+    </div>
+</section> <!-- .section -->
+
+@section MyJS{
+    <script src="~/js/sweetalert2.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('#placeOrderButton').click(function () {
+                $('form').submit();
+            });
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+            $('form').submit(function (e) {
+                if (!$('#MemberInfo_Name').val() || !$('#MemberInfo_PhoneNumber').val() || !$('#MemberInfo_Email').val() || !$('#MemberInfo_Address').val()) {
+                    alert('請填寫姓名、手機號碼、電子信箱和地址');
+                    e.preventDefault();
+                    return;
+                }
+
+                
+
+                if (!$('#accept').is(':checked')) {
+                    alert('請閱讀條款並接受');
+                    e.preventDefault();
+                    return;
+                }
+
+
+                swal({
+                    title: '完成',
+                    text: "下單成功!",
+                    type: 'success',
+                    showConfirmButton: true,
+                }).then(function () {
+                    // 用戶確認後提交表單
+                    $('form').unbind('submit').submit();
+                });
+
+                e.preventDefault();
+            });
+        });
+    </script>
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+}
+

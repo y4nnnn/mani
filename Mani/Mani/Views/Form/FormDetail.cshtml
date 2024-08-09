@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Mani.Models.Form>
+@{
+    ViewBag.Title = "FormDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section MyCSS
+    {
+    <style>
+
+
+        #customers tr:hover {
+            background-color: #6b4c1f;
+        }
+
+        #customers th, #customers td {
+            color: white; /* 文字顏色為白色 */
+        }
+
+        #customers th {
+            background-color: #C49B63;
+        }
+    </style>
+}
+<section class="home-slider owl-carousel d-flex align-items-end" style="height: 40vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                <h1 class="mb-3 bread">Room Reservation Search</h1>
+                <p class="breadcrumbs mb-0"><span class="mr-2"><a href="@Url.Action("Index","Home")">Home</a></span> <span>Room Reservation Search</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section contact-section">
+
+    <table class="table" id="customers">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CatsName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckIn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckOut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CatsNum)
+            </th>
+        </tr>
+
+        @*<hr style="border-top: 1px solid #ccc; margin-top: 15px; margin-bottom: 0;">*@
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OwnerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CatsName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckIn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckOut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CatsNum)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div style="text-align: center">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a href="/Form/FormDetail">第一頁</a>
+        }
+
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a href="/Form/ChangePage?pageIndex=@(ViewBag.CurrentPage-1)">上一頁</a>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="/Form/ChangePage?pageIndex=@(ViewBag.CurrentPage+1)">下一頁</a>
+        }
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="/Form/ChangePage?pageIndex=@ViewBag.TotalPages">最後一頁</a>
+        }
+
+
+        @ViewBag.CurrentPage / @ViewBag.TotalPages
+    </div>
+
+
+</section>
+

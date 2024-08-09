@@ -1,0 +1,90 @@
+﻿@model Mani.Models.Member
+@{
+    ViewBag.Title = "ForgetPWD";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="home-slider owl-carousel d-flex align-items-end" style="height: 40vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                <h1 class="mb-3 bread">Forget PassWord</h1>
+                <p class="breadcrumbs mb-0"><span class="mr-2"><a href="@Url.Action("Index","Home")">Home</a></span> <span>Forget PassWord</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section contact-section">
+    <div class="container mt-5">
+        <div class="row block-9 justify-content-center">
+            <div class="col-md-6 ftco-animate">
+                <form action="/Member/ForgetPWD" class="contact-form" method="post" autocomplete="off">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserName,  htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PhoneNumber,  htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email,  htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group d-flex justify-content-between">
+                        <input type="button" class="btn btn-primary py-3 px-5" id="btn1" value="Send Email" />
+                        <input type="button" class="btn btn-primary py-3 px-5" id="btnDemo" value="Demo" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+@section MyJS{
+    <script>
+    $(function () {
+        $("#btn1").click(function () {
+
+            //$(this).prop("disabled", true);
+
+            var obj = {
+                UserName: $("#UserName").val(),
+                PhoneNumber: $("#PhoneNumber").val(),
+                Email: $("#Email").val(),
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/Member/ForgetPWD",
+                data: JSON.stringify(obj), //json物件
+                //data: obj,
+                dataType: "json",
+                contentType: 'application/json; charset=UTF-8',
+                success: function (data) {
+                    alert(data.msg);
+
+                    location.href = "/Account/Login";
+                },
+                error: function (data) {
+                    alert("資料錯誤");
+                }
+
+            })
+
+        });
+
+    });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#btnDemo').click(function () {
+                $('#UserName').val('mani');
+                $('#PhoneNumber').val('0912345678');
+                $('#Email').val('tzeng2991yu@outlook.com');
+            });
+        });
+    </script>
+}

@@ -1,0 +1,229 @@
+﻿@model IEnumerable<Mani.Models.Manager>
+@{
+    ViewBag.Title = "ManagerOverview";
+    Layout = "~/Views/Shared/_Layout 2.cshtml";
+}
+
+<!-- Bread crumb and right sidebar toggle -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-7 align-self-center">
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">管理員列表</h4>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 p-0">
+                        <li class="breadcrumb-item"><a href="/Backend/Index" class="text-muted">首頁</a></li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">管理員列表</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- Container fluid  -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- basic table -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <!-- Column -->
+                        <div class="col-md-6 col-lg-3 col-xlg-3">
+                            <div class="card card-hover">
+                                <div class="p-2 bg-primary text-center">
+                                    <h1 class="font-light text-white">@ViewBag.TotalManagers</h1>
+                                    <h6 class="text-white">總管理員數</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                    </div>
+                    <div class="table-responsive">
+                        <table id="zero_config" class="table table-striped table-bordered no-wrap">
+                            <thead>
+                                <tr>
+                                    <th class="text-center"></th>
+                                    <th class="text-center">狀態</th>
+                                    <th class="text-center">照片</th>
+                                    <th class="text-center">編號</th>
+                                    <th class="text-center">帳號</th>
+                                    <th class="text-center">姓名</th>
+                                    <th class="text-center">手機號碼</th>
+                                    <th class="text-center">註冊時間</th>
+                                    @*<th class="text-center">@Html.DisplayNameFor(model => model.Status)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.ManagerImg)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.ManagerID)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.UserName)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.Name)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                                    <th class="text-center">@Html.DisplayNameFor(model => model.CreatedDate)</th>*@
+                                    <th class="text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td class="text-center align-middle">
+                                            @if (item.Status == "正常")
+                                            {
+                                                @*<button id="btn1" type="button" class="btn btn-secondary btn-circle" onclick="UpdateStatus('@item.OrderID')"><i class="fa fa-check"></i></button>*@
+                                                <button type="button" class="btn btn-info btn-circle update-status" data-managerid="@item.ManagerID"><i class="fa fa-check"></i></button>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" class="btn btn-warning btn-circle update-status2" data-managerid2="@item.ManagerID"><i class="fa fa-times"></i></button>
+                                            }
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @Html.DisplayFor(modelItem => item.Status)
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <img src="/Pic/manager/@item.ManagerImg" alt="Manager Image" class="img-thumbnail" style="max-width: 100px;" />
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @Html.DisplayFor(modelItem => item.ManagerID)
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @Html.DisplayFor(modelItem => item.UserName)
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            @*<button type="button"
+                                                        class="btn waves-effect waves-light btn-rounded btn-warning" onclick="location.href='/Manager/EditManager/@item.ManagerID'">
+                                                    修改
+                                                </button>
+                                                <button type="button"
+                                                        class="btn waves-effect waves-light btn-rounded btn-danger" onclick="location.href='/Manager/DelManager/@item.ManagerID'">
+                                                    刪除
+                                                </button>*@
+                                            <button type="button" class="btn waves-effect waves-light btn-rounded btn-warning btn-edit" data-managerid="@item.ManagerID">
+                                                修改
+                                            </button>
+                                            <button type="button" class="btn waves-effect waves-light btn-rounded btn-danger btn-delete" data-managerid="@item.ManagerID">
+                                                刪除
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="text-center"></th>
+                                    <th class="text-center">狀態</th>
+                                    <th class="text-center">照片</th>
+                                    <th class="text-center">編號</th>
+                                    <th class="text-center">帳號</th>
+                                    <th class="text-center">姓名</th>
+                                    <th class="text-center">手機號碼</th>
+                                    <th class="text-center">註冊時間</th>
+                                    <th class="text-center"></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <a href="/Manager/ManagerOverview">第一頁</a>
+
+                        @if (ViewBag.CurrentPage != 1)
+                        {
+                            <a href="/Manager/ChangePage?pageIndex=@(ViewBag.CurrentPage-1)">上一頁</a>
+                        }
+
+                        @if (ViewBag.CurrentPage != ViewBag.TotalPages)
+                        {
+                            <a href="/Manager/ChangePage?pageIndex=@(ViewBag.CurrentPage+1)">下一頁</a>
+                        }
+
+                        <a href="/Manager/ChangePage?pageIndex=@ViewBag.TotalPages">最後一頁</a>
+
+                        @ViewBag.CurrentPage / @ViewBag.TotalPages
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Container fluid  -->
+
+@section MyJS{
+
+    <script>
+        $(function () {
+            var userLevel = @(Session["Level"]);
+
+            $(".update-status").click(function () {
+                var managerId = $(this).data("managerid");
+
+                if (userLevel != 1) {
+                    alert("沒有權限");
+                    return false; // 
+                }
+
+                $.post("/Manager/UpdateStatus", { managerId: managerId })
+                    .done(function () {
+
+                        location.reload(); // 更新刷新页面
+                    })
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+
+            var userLevel = @(Session["Level"]);
+
+            $(".update-status2").click(function () {
+                var managerId = $(this).data("managerid2");
+
+                if (userLevel != 1) {
+                    alert("沒有權限");
+                    return false; // 
+                }
+                $.post("/Manager/UpdateStatus2", { managerId: managerId })
+                    .done(function () {
+
+                        location.reload(); // 刷新頁面
+                    })
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            var userLevel = @(Session["Level"]); 
+
+            
+            $(".btn-edit").click(function () {
+                var managerId = $(this).data("managerid");
+
+                window.location.href = "/Manager/EditManager/" + managerId;
+            });
+
+            $(".btn-delete").click(function () {
+                var managerId = $(this).data("managerid");
+
+                
+                if (userLevel != 1) { 
+                    alert("沒有權限");
+                    return false; // 
+                }
+
+                window.location.href = "/Manager/DelManager/" + managerId;
+            });
+        });
+    </script>
+
+}
+
